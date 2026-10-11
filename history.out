@@ -1,0 +1,42 @@
+    1  id; findmnt -o TARGET,OPTIONS / /home; getenforce; which setcap getcap
+    2  sudo groupadd students
+    3  sudo useradd -m -u 1234 -g students -s /bin/bash user1
+    4  sudo passwd user1
+    5  id user1
+    6  ls -ld /home/user1
+    7  sudo chage -M 90 user1
+    8  sudo chage -1 user1
+    9  sudo chage -l user1
+   10  sudo find -perm -4000 -type f
+   11  sudo find / -perm -4000 -type f
+   12  sudo find / -perm -4000 -type f > ~/suid-files.out
+   13  cat ~/suid-files.out
+   14  sudo passwd user1
+   15  ps -eo pid,ruid,euid,user,cmd | awk 'NR==1 || ($2>=1000 && $3==0)'
+   16  ps -eo pid,ruid,euid,user,cmd | awk 'NR==1 || ($2>=1000 && $3==0)' > ~/processes.out
+   17  cat ~/processes.out
+   18  sudo cp /usr/bin/cat /home/user1/cat
+   19  sudo chown root:root /home/user1/cat
+   20  sudo chmod u+s /home/user1/cat
+   21  ls -l /home/user1/cat
+   22  sudo ls -l /home/user1/cat
+   23  sudo cp /usr/bin/chgrp /home/user1/chgrp
+   24  sudo chown user1:students /home/user1/chgrp
+   25  sudo setcap cap_chown+ep /home/user1/chgrp
+   26  ls -l /home/user1/chgrp
+   27  sudo ls -l /home/user1/chgrp
+   28  sudo visudo
+   29  sudo -l -U user1
+   30  sudo grep user1 /etc/sudoers
+   31  sudo visudo
+   32  sudo -l -U user1
+   33  echo "MEPHI student ID: 368727"
+   34  sudo chronyc makestep
+   35  stat /home/user1 > ~/stat.out
+   36  sudo stat /home/user1/cat >> ~/stat.out
+   37  sudo stat /home/user1/chgrp >> ~/stat.out
+   38  sudo getcap /home/user1/chgrp > ~/getcap.out
+   39  sudo cp /etc/passwd /etc/shadow /etc/group /etc/sudoers ~/
+   40  sudo chown evg:evg ~/passwd ~/shadow ~/group ~/sudoers
+   41  chmod 644 ~/shadow ~/sudoers
+   42  history > ~/history.out
